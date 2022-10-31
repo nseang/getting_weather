@@ -1,0 +1,24 @@
+<div class="weather">
+  <h1 class="display-4 fw-bold">Local Weather</h1>
+  <div *ngIf="localWeather">
+    <p>{{localWeather.weather}}</p>
+    <p>High {{localWeather.tempHigh}}°F, Low: {{localWeather.tempLow}}°F</p>
+  </div>
+  <div *ngIf="!localWeather" class="loading">
+    Getting Local Weather
+  </div>
+
+</div>
+
+<app-location (gotLocalWeather)="getLocalWeather()" (gotSearchedWeather)="getSearchedWeather()" (displayError)="displayError()"></app-location>
+
+<div *ngIf="searchedWeather" class="weather">
+  <p>{{searchedWeather.weather}}</p>
+  <p>High {{searchedWeather.tempHigh}}°F, Low: {{searchedWeather.tempLow}}°F</p>
+</div>
+
+
+<div *ngIf="error" class="weather">
+  Unable to obtain the weather for that location
+</div>
+
