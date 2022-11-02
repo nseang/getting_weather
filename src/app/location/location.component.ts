@@ -16,7 +16,7 @@ export class LocationComponent implements OnInit {
 
 
 
-
+  // Wanted to store this data differently, but other implementations were taking too much time to debug
   weatherCodes = [
     {id:0, value:"Clear Sky"},
     {id:1, value:"Mainly Clear"},
@@ -54,6 +54,7 @@ export class LocationComponent implements OnInit {
   constructor(private weatherService: GetWeatherService) { }
 
   async ngOnInit() {
+    // will start to get the local weather on page load
     this.getLocalWeather();
   }
 
@@ -68,6 +69,7 @@ export class LocationComponent implements OnInit {
   }
 
   async getLocalWeather() {
+    // Will get the local weather by getting lat lon from IP address
     const coordinates: any = await this.weatherService.getLocation();
     this.weatherService.getWeatherByLatLon(coordinates.coords.latitude, coordinates.coords.longitude).subscribe((weather) => {
       this.weatherService.setLocalWeather(weather.daily.temperature_2m_max[0], weather.daily.temperature_2m_min[0], this.translateWeatherCode(weather.daily.weathercode[0]));
@@ -76,6 +78,7 @@ export class LocationComponent implements OnInit {
   }
 
   translateWeatherCode(weatherCode: number): string {
+    // defaulted to unknown weather for cases where the weather code was not found in the weatherCode array.
     let code = this.weatherCodes.find(code => code.id === weatherCode) ?? {id:-1, value:'Unknown'};
     return code.value;
   }

@@ -32,16 +32,21 @@ export class GetWeatherService {
   }
 
   getWeatherByCity() {
+    // Had initally planed to use a free weather API that could take in city names
+    // Most Free APIs were too limited to how many calls could be used per day
 
   }
 
   getLatLonFromCity(city: string) {
+    // Wanted to use the google API to get Lat Lon from city names, but was unable to obtain an API key
     // let url = 'https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters'
 
     
   }
 
   getLocation() {
+    // initially had the geolocation use a arrow function, but it had caused some issues with timing
+    // and would always be late with returning the coordinates.
     return new Promise(function(resolve, reject) {
       navigator.geolocation.getCurrentPosition(resolve, reject)
     })
